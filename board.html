@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Etch A Sketch</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>Etch a Sketch.</h1>
+
+    <div class="sketch-controller">
+      <form action="">
+        <label for="size">Size</label>
+        <input type="text" id="size" />
+        <button id="btn">Resize</button>
+      </form>
+    </div>
+    <div class="container"></div>
+    <script>
+      const btn = document.querySelector("#btn");
+      btn.addEventListener("click", addTiles);
+      function addTiles(e) {
+        e.preventDefault();
+
+        const container = document.querySelector(".container");
+        const tiles = document.querySelector("#size").value;
+        const size = 600 / tiles;
+
+        container.innerHTML = "";
+
+        for (let i = 0; i < tiles; i++) {
+          for (let j = 0; j < tiles; j++) {
+            const div = document.createElement("div");
+            div.style.cssText = `width:${size}px;height:${size}px`;
+            div.setAttribute("class", "item");
+            div.addEventListener("mouseover", changeDivColor);
+            container.appendChild(div);
+          }
+        }
+      }
+
+      function changeDivColor() {
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        this.style.backgroundColor = `rgb(${r},${g},${b})`;
+      }
+    </script>
+  </body>
+</html>
